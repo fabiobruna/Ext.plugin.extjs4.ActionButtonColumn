@@ -60,34 +60,13 @@
  * action columns. </p>
  * @xtype actionbuttoncolumn
  */
-Ext.define('Ext.ux.grid.column.ActionButtonColumn', {
+
+Ext.define('Ext.ux.ActionButtonColumn', {
 
     extend: 'Ext.grid.column.Column',
     alias: ['widget.actionbuttoncolumn'],
     alternateClassName: 'Ext.grid.ActionButtonColumn',
 
-    /**
-     * @cfg {Function} handler A function called when the button is clicked.
-     * The handler(or event) is passed the following parameters:<div class="mdetail-params"><ul>
-     * <li><code>view</code> : TableView<div class="sub-desc">The owning TableView.</div></li>
-     * <li><code>rowIndex</code> : Number<div class="sub-desc">The row index clicked on.</div></li>
-     * <li><code>colIndex</code> : Number<div class="sub-desc">The column index clicked on.</div></li>
-     * </ul></div>
-     */
-
-    /**
-     * @cfg {Array} items An Array which may contain multiple button definitions, each element of which may contain:
-     * <div class="mdetail-params"><ul>
-     * <li><code>text</code> : String<div class="sub-desc">The button text to be used as innerHTML (html tags are accepted).</div></li>
-     * <li><code>iconIndex</code> : String<div class="sub-desc">Optional, however either iconIndex or iconCls must be configured. Field name of the field of the grid store record that contains css class of the button to show. If configured, shown icons can vary depending of the value of this field.</div></li>
-     * <li><code>hideIndex</code> : String<div class="sub-desc">Optional. Field name of the field of the grid store record that contains hide flag (falsie [null, '', 0, false, undefined] to show, anything else to hide).</div></li>
-     * <li><code>showIndex</code> : String<div class="sub-desc">Optional. This is the polar opposite of hideIndex. Will show this button if the field specified is truethy</div></li>.
-     * <li><code>eventName</code> : String<div class="sub-desc">Optional. This is a unique name for an event that will get created on the parent gridview. (ignored if handler is specified)</div></li>
-     * <li><code>handler</code> : Function<div class="sub-desc">A function called when the button is clicked.</div></li>
-     * <li><code>scope</code> : Ref<div class="sub-desc">The scope (<em>this</em>) of the handler function.</div></li>
-     * <li><code>cls</code> : String<div class="sub-desc">cls spefies the class of the button. In addition, if there is no handler or eventName set the class is stripped down to Alpha characters and suffixed with "click" to create an event on the parent gridview</div></li>
-     * </ul></div>
-     */
     header: '&#160;',
 
     sortable: false,
@@ -112,12 +91,13 @@ Ext.define('Ext.ux.grid.column.ActionButtonColumn', {
         // Renderer closure iterates through items creating a button element for each and tagging with an identifying
         me.renderer = function(v, meta, rec, rowIndex, colIndex, store, view) {
 
-            if (gv == '') {
+            if (gv === '') {
                 gv = view;
 
                 var evnts = {
                     'actionbuttonclick':true
-                }
+                };
+
                 Ext.Array.each(items, function(btn) {
                     if (btn.handler) { }
                     else if (btn.eventName) {
@@ -163,7 +143,8 @@ Ext.define('Ext.ux.grid.column.ActionButtonColumn', {
                                 view.fireEvent('actionbuttonclick', this, view, rowIndex, colIndex);
                             }
                             view.fireEvent(eventName, view, rowIndex, colIndex);
-                        }
+                        };
+
                     })(item);
                 }
                 var hide;
